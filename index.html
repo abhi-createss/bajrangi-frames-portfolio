@@ -298,6 +298,80 @@
   .work-card:hover .play-btn{transform:translate(-50%,-50%) scale(1.1); background:var(--orange); border-color:var(--orange);}
   .play-btn svg{width:20px; height:20px; margin-left:3px;}
 
+  /* ---------- THUMBNAILS ---------- */
+  .thumbs{background:var(--black);}
+  .thumbs-sub{
+    max-width:520px; margin:-20px auto 40px; text-align:center;
+    color:var(--text-muted); font-size:15px; line-height:1.6;
+  }
+  .thumb-grid{
+    display:grid; grid-template-columns:repeat(2, 1fr);
+    max-width:760px; margin:0 auto; gap:26px;
+  }
+  .thumb-card{aspect-ratio:16/9;}
+  .thumb-card .play-btn{width:60px; height:60px;}
+
+  /* ---------- ABOUT / VALUE ---------- */
+  .about{
+    background:linear-gradient(180deg, rgba(234,88,12,0.05), transparent 60%);
+  }
+  .about-grid{
+    display:grid; grid-template-columns:1.3fr 1fr; gap:60px; align-items:center;
+  }
+  h3.punch{
+    font-family:var(--font-punch);
+    font-size:clamp(32px, 4.6vw, 54px);
+    line-height:1.05;
+    margin-bottom:22px;
+  }
+  h3.punch .accent{color:var(--orange);}
+  .about-body p{
+    font-size:16px; line-height:1.75; color:var(--text-muted);
+    max-width:520px;
+  }
+  .about-cta{
+    display:inline-flex; align-items:center; gap:10px; margin-top:28px;
+    font-family:var(--font-body); font-weight:700; font-size:13px;
+    letter-spacing:1px; text-transform:uppercase;
+    background:var(--orange); color:#ffffff;
+    padding:14px 26px; border:none; border-radius:999px; cursor:pointer;
+    transition:background .3s ease, transform .2s ease;
+  }
+  .about-cta:hover{background:var(--orange-light); transform:translateY(-1px);}
+  .stat-card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:40px 32px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .stat-card::before{
+    content:""; position:absolute; inset:0;
+    background:radial-gradient(circle at 30% 20%, rgba(234,88,12,.25), transparent 60%);
+  }
+  .stat-num{
+    position:relative;
+    font-family:var(--font-display);
+    font-size:clamp(56px, 8vw, 84px);
+    color:var(--orange);
+    line-height:1;
+  }
+  .stat-label{
+    position:relative;
+    margin-top:10px;
+    font-size:13px; letter-spacing:1px; text-transform:uppercase;
+    color:var(--text-muted); font-weight:600;
+  }
+  .stat-foot{
+    position:relative;
+    margin-top:26px; padding-top:22px;
+    border-top:1px solid var(--line);
+    font-size:14px; color:var(--text-muted);
+  }
+  .stat-foot b{color:var(--text); font-weight:700;}
+
   /* ---------- CONTACT PANEL ---------- */
   .contact-overlay{
     position:fixed; top:0; right:0; bottom:0; left:0; z-index:200;
@@ -328,8 +402,53 @@
     display:flex; align-items:center; justify-content:center;
     flex-shrink:0;
   }
+  .contact-row{
+    display:flex; align-items:center; gap:16px;
+    padding:16px 14px; border-radius:14px;
+    border:1px solid var(--line);
+    margin-bottom:12px;
+    transition:border-color .25s ease, background .25s ease;
+  }
+  .contact-row:hover{border-color:var(--orange); background:rgba(234,88,12,.06);}
+  .contact-icon{
+    width:42px; height:42px; border-radius:50%;
+    background:rgba(234,88,12,.14);
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+  .contact-icon svg{width:18px; height:18px; color:var(--orange); display:block;}
+  .contact-text{min-width:0; flex:1;}
+  .contact-text small{
+    display:block; font-size:11px; letter-spacing:1px; text-transform:uppercase;
+    color:var(--text-muted); margin-bottom:3px;
+  }
+  .contact-text span{
+    font-size:15px; font-weight:600;
+    display:block;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
 
-  /* ---------- LIGHTBOX ---------- */
+  @media (max-width:480px){
+    .contact-overlay{padding:100px 10px 16px;}
+    .contact-panel{padding:28px 16px;}
+    .contact-row{padding:14px 8px; gap:10px;}
+    .contact-icon{width:36px; height:36px;}
+    .contact-icon svg{width:15px; height:15px;}
+  }
+
+  /* ---------- ABOUT PANEL ---------- */
+  .about-panel-body{margin-bottom:22px;}
+  .about-name{
+    font-family:var(--font-punch); font-size:24px; letter-spacing:.5px;
+    margin-bottom:10px; color:var(--text);
+  }
+  .about-panel-body p{font-size:15px; line-height:1.7; color:var(--text-muted);}
+  .about-panel-body p b{color:var(--text); font-weight:700;}
+  .social-row{display:flex; flex-direction:column; gap:0;}
+
+  /* ---------- LIGHTBOX (full-screen preview) ---------- */
   .lightbox-overlay{
     position:fixed; top:0; right:0; bottom:0; left:0; z-index:300;
     background:rgba(4,3,3,0.94);
@@ -352,13 +471,51 @@
   }
   .lightbox-close:hover{background:var(--orange); border-color:var(--orange); transform:scale(1.06);}
   .lightbox-stage{
-    position:relative; width:100%; max-height:82vh;
+    position:relative;
+    width:100%; max-height:82vh;
     display:flex; flex-direction:column; align-items:center; justify-content:center;
     border-radius:18px; overflow:hidden;
+    background:
+      radial-gradient(circle at 70% 20%, rgba(234,88,12,.28), transparent 55%),
+      linear-gradient(160deg, #201a17, #0d0b0a);
+    border:1px solid rgba(255,255,255,0.1);
   }
-  
+  .lightbox-stage.ratio-9-16{ width:min(84vw, 380px); aspect-ratio:9/16; }
+  .lightbox-stage.ratio-16-9{ width:min(90vw, 760px); aspect-ratio:16/9; }
+  .lightbox-stage video, .lightbox-stage img{width:100%; height:100%; object-fit:cover;}
+  .lightbox-placeholder{
+    display:flex; flex-direction:column; align-items:center; gap:14px;
+    color:rgba(255,255,255,0.6); text-align:center; padding:20px;
+  }
+  .lightbox-placeholder .icon-circle{
+    width:64px; height:64px; border-radius:50%;
+    background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.25);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .lightbox-placeholder .icon-circle svg{width:22px; height:22px; color:#ffffff;}
+  .lightbox-caption{
+    margin-top:18px; font-family:var(--font-display); font-size:20px;
+    letter-spacing:1px; color:#ffffff;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    padding:32px 6vw; text-align:center;
+    border-top:1px solid var(--line);
+    font-size:13px; color:var(--text-muted);
+  }
+  footer b{color:var(--orange);}
+
+  @media (prefers-reduced-motion: reduce){
+    .glow, .marquee{animation:none;}
+    html{scroll-behavior:auto;}
+    .reveal{opacity:1; transform:none; transition:none;}
+  }
+
   /* ---------- RESPONSIVE ---------- */
   @media (max-width:860px){
+    .about-grid{grid-template-columns:1fr;}
+    .facts-grid{grid-template-columns:repeat(2,1fr);}
     nav.links{
       position:absolute; top:100%; left:0; right:0;
       flex-direction:column; gap:0;
@@ -370,6 +527,17 @@
     nav.links.open{max-height:320px;}
     nav.links a{padding:16px 6vw; border-bottom:1px solid var(--line);}
     .hamburger{display:flex;}
+  }
+  @media (max-width:560px){
+    section{padding:76px 6vw;}
+    .work-grid, .thumb-grid{gap:14px;}
+    .work-tag{font-size:15px; padding:12px 12px;}
+    .play-btn{width:46px; height:46px;}
+    .stat-card{padding:30px 22px;}
+    .facts-grid{grid-template-columns:1fr;}
+    .lightbox-close{width:38px; height:38px; top:16px; right:16px;}
+    .lightbox-stage.ratio-9-16{width:88vw;}
+    .lightbox-stage.ratio-16-9{width:92vw;}
   }
 </style>
 </head>
@@ -383,7 +551,7 @@
   </div>
   <div class="nav-right-group">
     <nav class="links" id="navLinks">
-      <a href="javascript:void(0)" onclick="closeMenu(); goTo('facts')">About</a>
+      <a href="javascript:void(0)" onclick="closeMenu(); toggleAbout(true)">About</a>
       <a href="javascript:void(0)" onclick="closeMenu(); goTo('work')">Work</a>
     </nav>
     <div class="nav-actions">
@@ -437,7 +605,7 @@
       </div>
       <div class="fact-card reveal d3">
         <h3>Internship</h3>
-        <p>Completed professional internship with Help Study Abroad.</p>
+        <p>Completed a 3-month internship with Help Study Abroad.</p>
       </div>
       <div class="fact-card reveal d4">
         <h3>Formats</h3>
@@ -455,112 +623,37 @@
       </div>
     </div>
     <div class="work-grid">
-      <div class="work-card reveal d1" onclick="openLightbox(this)" data-title="Project 01" tabindex="0" role="button" aria-label="Open Project 01">
-        <img class="work-thumb-video" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgAAAQABAAD//gAQTGF2YzYwLjMxLjEwMgD..." alt="">
+      
+      <!-- Video 1 -->
+      <div class="work-card reveal d1" onclick="openLightbox(this)" data-kind="youtube" data-ratio="9-16" data-title="Project 01" data-yt="nq_65FGc-Pc" tabindex="0" role="button" aria-label="Open Project 01 full screen">
+        <img class="work-thumb-video" src="https://i.ytimg.com/vi/nq_65FGc-Pc/hqdefault.jpg" alt="Project 01">
         <div class="play-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
         <div class="work-tag"><small>Project 01</small>Podcast Hook Edit</div>
       </div>
       
-      <div class="work-card reveal d2" onclick="openLightbox(this)" data-title="Project 02" tabindex="0" role="button" aria-label="Open Project 02">
-        <img class="work-thumb-video" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgAAAQABAAD//gAQTGF2YzYwLjMxLjEwMgD..." alt="">
+      <!-- Video 2 -->
+      <div class="work-card reveal d2" onclick="openLightbox(this)" data-kind="youtube" data-ratio="9-16" data-title="Project 02" data-yt="hE0-RnA6Ivk" tabindex="0" role="button" aria-label="Open Project 02 full screen">
+        <img class="work-thumb-video" src="https://i.ytimg.com/vi/hE0-RnA6Ivk/hqdefault.jpg" alt="Project 02">
         <div class="play-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-        <div class="work-tag"><small>Project 02</small>Reel / Shorts</div>
+        <div class="work-tag"><small>Project 02</small>Gaming Reel Edit</div>
       </div>
+
+      <!-- Video 3 -->
+      <div class="work-card reveal d3" onclick="openLightbox(this)" data-kind="youtube" data-ratio="9-16" data-title="Project 03" data-yt="KNoMcmRt2fQ" tabindex="0" role="button" aria-label="Open Project 03 full screen">
+        <img class="work-thumb-video" src="https://i.ytimg.com/vi/KNoMcmRt2fQ/hqdefault.jpg" alt="Project 03">
+        <div class="play-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+        <div class="work-tag"><small>Project 03</small>Vlog Short Edit</div>
+      </div>
+
+      <!-- Video 4 -->
+      <div class="work-card reveal d4" onclick="openLightbox(this)" data-kind="youtube" data-ratio="9-16" data-title="Project 04" data-yt="Jqg9hfCKkZw" tabindex="0" role="button" aria-label="Open Project 04 full screen">
+        <img class="work-thumb-video" src="https://i.ytimg.com/vi/Jqg9hfCKkZw/hqdefault.jpg" alt="Project 04">
+        <div class="play-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+        <div class="work-tag"><small>Project 04</small>Fitness Reel Edit</div>
+      </div>
+
     </div>
   </section>
-
 </main>
-
-<!-- CONTACT OVERLAY -->
-<div class="contact-overlay" id="contactOverlay">
-  <div class="contact-panel">
-    <div class="contact-panel-head">
-      <h3>Contact Me</h3>
-      <button class="close-btn" onclick="toggleContact(false)">X</button>
-    </div>
-    <p style="margin-bottom: 20px;">Ready to elevate your content? Let's talk.</p>
-    <div class="contact-row">
-      <div class="contact-text">
-        <small>Email</small>
-        <span>hello@editroam.com</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- LIGHTBOX OVERLAY -->
-<div class="lightbox-overlay" id="lightboxOverlay">
-  <button class="lightbox-close" onclick="closeLightbox()">X</button>
-  <div class="lightbox-stage" id="lightboxStage">
-    <!-- Content injected via JS -->
-    <h3 style="color: white; font-family: var(--font-display);">Project Placeholder</h3>
-  </div>
-</div>
-
-<!-- JS SCRIPTS -->
-<script>
-  // Mobile Menu Toggle
-  function toggleMenu() {
-    document.getElementById('navLinks').classList.toggle('open');
-  }
-
-  function closeMenu() {
-    document.getElementById('navLinks').classList.remove('open');
-  }
-
-  // Smooth Scroll
-  function goTo(id) {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
-  }
-
-  // Contact Panel Toggle
-  function toggleContact(show) {
-    const overlay = document.getElementById('contactOverlay');
-    if (show) {
-      overlay.classList.add('open');
-    } else {
-      overlay.classList.remove('open');
-    }
-  }
-
-  // Lightbox Toggle
-  function openLightbox(element) {
-    const overlay = document.getElementById('lightboxOverlay');
-    const title = element.getAttribute('data-title');
-    
-    // Set placeholder text to show it works
-    const stage = document.getElementById('lightboxStage');
-    stage.innerHTML = `<h3 style="color: white; font-family: var(--font-display); letter-spacing: 2px;">${title} Preview</h3>`;
-    
-    overlay.classList.add('open');
-  }
-
-  function closeLightbox() {
-    document.getElementById('lightboxOverlay').classList.remove('open');
-  }
-
-  // Scroll Reveal Animations
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: "0px 0px -50px 0px"
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in-view');
-        observer.unobserve(entry.target); // Animate only once
-      }
-    });
-  }, observerOptions);
-
-  document.querySelectorAll('.reveal').forEach(el => {
-    observer.observe(el);
-  });
-</script>
-
 </body>
 </html>
